@@ -14,6 +14,7 @@ Description: Functions to calculate and plot the standard metabolic rate (SMR)
     animal was fed, the Specific Dynamic Action (SDA) can be calculated and
     illustrated. Finally, functions to calculate the solubility of oxygen in
     water and to convert between different units of DO are provided.
+URL: http://github.com/denis-chabot/fishMO2
 Depends: R (>= 3.0.0)
 License: LGPL-3
 LazyLoad: true
