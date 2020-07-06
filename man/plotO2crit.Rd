@@ -5,10 +5,17 @@
 \title{Plot oxygen uptake values as a function of dissolved oxygen and show
 O2crit.}
 \usage{
-plotO2crit(o2critobj, plotID = "",
-  o2lab = "Dissolved oxygen (\% sat.)", mo2lab = expression(M[O[2]]),
-  smr.cex = 0.9, o2crit.cex = 0.9, plotID.cex = 1.2,
-  Transparency = T, ...)
+plotO2crit(
+  o2critobj,
+  plotID = "",
+  o2lab = "Dissolved oxygen (\% sat.)",
+  mo2lab = expression(M[O[2]]),
+  smr.cex = 0.9,
+  o2crit.cex = 0.9,
+  plotID.cex = 1.2,
+  Transparency = T,
+  ...
+)
 }
 \arguments{
 \item{o2critobj}{Object created by \verb{calcO2crit}. It is a list that

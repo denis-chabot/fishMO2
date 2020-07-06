@@ -4,8 +4,11 @@
 \alias{convO2conc}
 \title{Conversion between oxygen concentration units.}
 \usage{
-convO2conc(x, from = c("mg", "ml", "umol", "mmol"), to = c("umol",
-  "mg", "ml", "mmol"))
+convO2conc(
+  x,
+  from = c("mg", "ml", "umol", "mmol"),
+  to = c("umol", "mg", "ml", "mmol")
+)
 }
 \arguments{
 \item{x}{A single value or a vector of values to be converted.}

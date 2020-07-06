@@ -1,11 +1,3 @@
-###
-# final version for O2crit paper
-
-
-
-
-
-
 ##' Calculate the critical oxygen level (O2crit) of a fish or aquatic
 ##' invertebrate.
 ##'
@@ -144,10 +136,12 @@ calcO2crit <- function(Data, SMR, lowestMO2=NA)
 {
     # programmed by Denis Chabot, Institut Maurice-Lamontagne, DFO, Canada
     # first version written in June 2009
-    # last updated in July 2018
+    # updated in July 2018
     # updated 2018-12-16 to improve how functions from other packages are handled
 
-    # require(segmented)
+    # MO2 <- DO <- W <- NULL  # R check was telling me "no visible binding for global variable" for these variables
+    # I found another solution: replace the "subset" commands by indexing. Oups, I had to keep this solution for W
+    W <- NULL  # R check was telling me "no visible binding for global variable" for these variables
     Data = na.omit(Data)
     method = "LS_reg"  # will become "through_origin" if intercept is > 0
     if(is.na(lowestMO2)) lowestMO2 = quantile(Data$MO2[Data$DO >= 80], p=0.05)
@@ -165,13 +159,15 @@ calcO2crit <- function(Data, SMR, lowestMO2=NA)
     # here defined as all data < SMR+20%
     # I subsample the data in normoxia, otherwise they can overwhelm the data in hypoxia
     prop.of.SMR = 1.2  # move this to function parameters?
-    dfs1 = subset(Data, MO2<= prop.of.SMR*SMR & DO >= 80)
+    # dfs1 = subset(Data, MO2<= prop.of.SMR*SMR & DO >= 80)
+    dfs1 = Data[Data$MO2<= prop.of.SMR*SMR & Data$DO >= 80,]
     max.to.keep = 25
     if(nrow(dfs1) > max.to.keep) {
         keep = sample(1:nrow(dfs1), max.to.keep)  # select 25 rows from the dataframe
         dfs1 = dfs1[keep,]
     }
-    dfs2 = subset(Data, MO2<= prop.of.SMR*SMR & DO < 80)
+    # dfs2 = subset(Data, MO2<= prop.of.SMR*SMR & DO < 80)
+    dfs2 = Data[Data$MO2<= prop.of.SMR*SMR & Data$DO < 80,]
     DataForSegm = rbind(dfs1, dfs2)
     rm(dfs1, dfs2)
     modl =lm(MO2~DO, data=DataForSegm)
@@ -232,13 +228,14 @@ calcO2crit <- function(Data, SMR, lowestMO2=NA)
     HighValues = Data$delta > tol
     Ranks = rank(-1*Data$delta)
     HighMO2 = HighValues & Ranks == min(Ranks)    # keep largest residual
+    Data$W = NA
     if (sum(HighValues) > 0) {
         nblethal = sum(lethal)
-        Data$W = NA
+        # Data$W = NA
         Data$W[lethal]=1/nblethal
         Data$W[HighMO2] = 2  # v0.42 was 1 heavy weight, we force the regression
                              # to go through this high value
-        Mod_conf = lm(MO2~DO, weight=W, data=Data[lethal | HighMO2,])
+        Mod_conf = lm(MO2~DO, weights=W, data=Data[lethal | HighMO2,])
     } # end search for positive residuals
 
     Coef = coefficients(Mod_conf)

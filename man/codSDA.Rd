@@ -5,20 +5,22 @@
 \alias{codSDA}
 \title{Oxygen uptake data from a juvenile Atlantic cod before and after ingestion
 of a meal}
-\format{A data frame with 947 observations on the following 5 variables:
-\describe{ \item{list("DateTime")}{a POSIXct vector indicating date and
-time for each measurement} \item{list("Logtime_hr")}{a numeric vector
+\format{
+A data frame with 947 observations on the following 5 variables:
+\describe{ \item{DateTime}{a POSIXct vector indicating date and
+time for each measurement} \item{Logtime_hr}{a numeric vector
 indicating the time, in hours, relative to feeding. Measurements obtained
 before feeding have a negative value for this variable}
-\item{list("MO2")}{a numeric vector representing oxygen uptake, in
+\item{MO2}{a numeric vector representing oxygen uptake, in
 micromoles of oxygen per min per kg of body mass}
-\item{list("MO2cor")}{same as MO2, except for the first 10 hours after the
+\item{MO2cor}{same as MO2, except for the first 10 hours after the
 meal: these measurements were corrected for the increase in MO2 resulting
 from the feeding procedure. The correction was based on an exponential
 decay function fitted to data obtained after a sham feeding that took place
-the day prior to feeding.} \item{list("r2")}{a numeric vector representing
+the day prior to feeding.} \item{r2}{a numeric vector representing
 the coefficient of determination R^2 of the regression between dissolved
-oxygen and time for a given value of MO2} }}
+oxygen and time for a given value of MO2} }
+}
 \source{
 Collected by Denis Chabot at the Maurice-Lamontagne Institute,
 Department of Fisheries and Oceans, Canada.

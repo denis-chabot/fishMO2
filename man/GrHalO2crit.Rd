@@ -5,19 +5,21 @@
 \alias{GrHalO2crit}
 \title{Oxygen uptake data from an adult Greenland halibut to illustrate the
 determination of SMR and O2crit}
-\format{A data frame with 220 observations on the following 6 variables:
-\describe{ \item{list("DateTime")}{a POSIXct vector indicating date and
-time for each measurement} \item{list("Logtime_hr")}{a numeric vector
+\format{
+A data frame with 220 observations on the following 6 variables:
+\describe{ \item{DateTime}{a POSIXct vector indicating date and
+time for each measurement} \item{Logtime_hr}{a numeric vector
 indicating the time, in hours, relative to feeding. Measurements obtained
 before feeding have a negative value for this variable}
-\item{list("MO2")}{a numeric vector representing oxygen uptake, in
-micromoles of oxygen per min per kg of body mass} \item{list("r2")}{a
+\item{MO2}{a numeric vector representing oxygen uptake, in
+micromoles of oxygen per min per kg of body mass} \item{r2}{a
 numeric vector representing the coefficient of determination R^2 of the
 regression between dissolved oxygen and time for a given value of MO2}
-\item{list("Aver_O2")}{a numeric vector representing the average level of
+\item{Aver_O2}{a numeric vector representing the average level of
 dissolved oxygen (in kPa) in the respirometer during each measurement of
-MO2} \item{list("DO")}{a numeric vector representing the equivalent of
-Aver_O2 in \% saturation units} }}
+MO2} \item{DO}{a numeric vector representing the equivalent of
+Aver_O2 in \% saturation units} }
+}
 \source{
 Collected by Denis Chabot at the Maurice-Lamontagne Institute,
 Department of Fisheries and Oceans, Canada.

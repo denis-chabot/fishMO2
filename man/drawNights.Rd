@@ -4,9 +4,16 @@
 \alias{drawNights}
 \title{Show night time on an existing plot.}
 \usage{
-drawNights(startD, endD, Site = Sites$IML, TimeZone = myTZs$IMLst,
-  coords, XunitsOut = "POSIXct", zero = NA, night.col = rgb(0, 0, 0,
-  0.08))
+drawNights(
+  startD,
+  endD,
+  Site = Sites$IML,
+  TimeZone = myTZs$IMLst,
+  coords,
+  XunitsOut = "POSIXct",
+  zero = NA,
+  night.col = rgb(0, 0, 0, 0.08)
+)
 }
 \arguments{
 \item{startD}{First day in dataset, in Date format.}

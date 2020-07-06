@@ -5,10 +5,15 @@
 \title{Make a formatted label for oxygen uptake (MO2), SDA or oxygen
 concentration.}
 \usage{
-makeO2lab(mo2 = c("dotital", "dot", "ital", "plain", "hidden"),
-  o2 = c("mg", "ug", "mmol", "umol", "ml", "mL"), t = c("hr", "min"),
-  m = c("kg", "g", "mg"), v = c("l", "L"), showO2 = F,
-  Type = c("MO2msp", "MO2ind", "SDAmsp", "SDAind", "conc"))
+makeO2lab(
+  mo2 = c("dotital", "dot", "ital", "plain", "hidden"),
+  o2 = c("mg", "ug", "mmol", "umol", "ml", "mL"),
+  t = c("hr", "min"),
+  m = c("kg", "g", "mg"),
+  v = c("l", "L"),
+  showO2 = F,
+  Type = c("MO2msp", "MO2ind", "SDAmsp", "SDAind", "conc")
+)
 }
 \arguments{
 \item{mo2}{If the label is for oxygen uptake (see Type), selects the
@@ -25,6 +30,8 @@ labels.}
 \item{m}{Mass unit for the animal, either \verb{kg}, \verb{g} or \verb{mg}.
 Used for mass-specific MO2 or SDA, not used in "per individual"
 measurements.}
+
+\item{v}{Volume unit when dealing with oxygen concentration.}
 
 \item{showO2}{Logical, to hide or show \verb{O2} after the oxygen unit.}
 
@@ -49,7 +56,7 @@ oxygen concentration to produce publication-quality figures.
 \examples{
 
 # for a plot of MO2 as a function of time
-mo2lab = makeO2lab(mo2="dotital", o2= "mg", t="hr", m="kg", v="l", showO2 = F, Type="MO2msp")
+mo2lab = makeO2lab(mo2="dotital", o2= "mg", t="hr", m="kg", v="l", showO2 = FALSE, Type="MO2msp")
 plot(1:10, xlab="Time", ylab=mo2lab, mgp=c(2,0.5,0))
 
 }

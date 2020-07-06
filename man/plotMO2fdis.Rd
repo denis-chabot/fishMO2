@@ -6,9 +6,16 @@
 for an animal and show the normal distributions that were fitted to these
 data.}
 \usage{
-plotMO2fdis(X, g = 1:4, Breaks = 100, mo2lab = expression(M[O[2]]),
-  Border.col = grey(0.5), Bar.col = grey(0.92), ColNormdis = "blue",
-  ...)
+plotMO2fdis(
+  X,
+  g = 1:4,
+  Breaks = 100,
+  mo2lab = expression(M[O[2]]),
+  Border.col = grey(0.5),
+  Bar.col = grey(0.92),
+  ColNormdis = "blue",
+  ...
+)
 }
 \arguments{
 \item{X}{A vector or data frame column representing multiple measurements

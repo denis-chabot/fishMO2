@@ -5,12 +5,25 @@
 \title{Add SDA fit and SDA parameters to an existing plot of oxygen uptake values
 as a function of time.}
 \usage{
-plotSDA(my.sda, show.par = T, show.var = T, show.smr.line = T,
-  show.feeding = T, show.mag.arrow = T, peak.lab.pos = NULL,
-  mag.lab.pos = NULL, smr.lab.pos = c("2L", "1L", "none"),
-  lty.smr = 1, col.smr = "orange", lty.feeding = 1,
-  Col.feeding = "seagreen", Cex.par = 0.8, Cex.sda = 0.9,
-  Col.sda = rgb(1, 0, 0, 0.2), ...)
+plotSDA(
+  my.sda,
+  show.par = T,
+  show.var = T,
+  show.smr.line = T,
+  show.feeding = T,
+  show.mag.arrow = T,
+  peak.lab.pos = NULL,
+  mag.lab.pos = NULL,
+  smr.lab.pos = c("2L", "1L", "none"),
+  lty.smr = 1,
+  col.smr = "orange",
+  lty.feeding = 1,
+  col.feeding = "seagreen",
+  Cex.par = 0.8,
+  Cex.sda = 0.9,
+  col.sda = rgb(1, 0, 0, 0.2),
+  ...
+)
 }
 \arguments{
 \item{my.sda}{Object created by \code{calcSDA}.}
@@ -50,17 +63,17 @@ R.}
 \item{lty.feeding}{Line type for time of feeding, same meaning as \code{lty}
 for any line in R.}
 
+\item{col.feeding}{Colour of the vertical line representing feeding time.}
+
 \item{Cex.par}{Size of the text for tau and lambda. Same use as \code{cex}
 parameter in \code{text}.}
 
 \item{Cex.sda}{Size of the text for the SDA parameters. Same use as
 \code{cex} parameter in \code{text}}
 
-\item{Col.sda}{Colour of the shading representing SDA magnitude.}
+\item{col.sda}{Colour of the shading representing SDA magnitude.}
 
 \item{\dots}{Other graphics parameters may work.}
-
-\item{col.feeding}{Colour of the vertical line representing feeding time.}
 }
 \description{
 Displays the SDA line fitted by \code{calcSDA} on top of a plot of MO2 vs
@@ -100,22 +113,22 @@ SDA= calcSDA(X=sda.data$Logtime_hr, Y=sda.data$MO2cor, my.smr=81.2,
 
 par(mar=c(4, 4, 0.1, 0.1)+0.1, mgp=c(1.8,0.5,0))
 plotMO2(sda.data$Logtime_hr, sda.data$MO2cor, mo2="dotital", o2="umol", t="min", m="kg",
-    showO2 = F, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250))
+    showO2 = FALSE, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250))
 plotSDA(SDA)
 # not enough space to show the arrow associated with magnitude, better to hide it
 plotMO2(sda.data$Logtime_hr, sda.data$MO2cor, mo2="dotital", o2="umol", t="min", m="kg",
-    showO2 = F, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250))
-plotSDA(SDA, show.mag.arrow=F)
+    showO2 = FALSE, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250))
+plotSDA(SDA, show.mag.arrow=FALSE)
 
 # same data, but focus on post-feeding data and the SDA
 plotMO2(sda.data$Logtime_hr, sda.data$MO2cor, mo2="dotital", o2="umol", t="min", m="kg",
-    showO2 = F, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250), xlim=c(0,100))
+    showO2 = FALSE, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250), xlim=c(0,100))
 plotSDA(SDA, smr.lab.pos="1L")
 
 # SMR label is illegible, better not to display it
 # Default position for peak not great, force a new position
 plotMO2(sda.data$Logtime_hr, sda.data$MO2cor, mo2="dotital", o2="umol", t="min", m="kg",
-    showO2 = F, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250), xlim=c(0,100))
+    showO2 = FALSE, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250), xlim=c(0,100))
 plotSDA(SDA, smr.lab.pos="none", peak.lab.pos=c(40,150))
 
 

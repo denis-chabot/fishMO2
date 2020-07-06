@@ -4,9 +4,13 @@
 \alias{wvp}
 \title{Water vapor pressure as a function of water temperature and salinity}
 \usage{
-wvp(t, s = 0, method = c("IAPWS", "BensonKrause", "GreenCarritt",
-  "WMO2008", "Antoine", "Weiss", "GoffGratch"), sal_method = c("Chabot",
-  "Green", "none"))
+wvp(
+  t,
+  s = 0,
+  method = c("IAPWS", "BensonKrause", "GreenCarritt", "WMO2008", "Antoine", "Weiss",
+    "GoffGratch"),
+  sal_method = c("Chabot", "Green", "none")
+)
 }
 \arguments{
 \item{t}{Temperature in °C}

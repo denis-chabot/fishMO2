@@ -5,8 +5,17 @@
 \title{Make 3 plots involving the $"R"^2$ for each MO2 measurement for a single
 individual fish or other water-breathing animal.}
 \usage{
-plotR2(r2, time, mo2, r2lab = expression(r^2), Timelab = "Time",
-  mo2lab = expression(M[O[2]]), minR2 = NULL, cex = 0.7, ...)
+plotR2(
+  r2,
+  time,
+  mo2,
+  r2lab = expression(r^2),
+  Timelab = "Time",
+  mo2lab = expression(M[O[2]]),
+  minR2 = NULL,
+  cex = 0.7,
+  ...
+)
 }
 \arguments{
 \item{r2}{Vector or data frame column holding the R2 for each measurement

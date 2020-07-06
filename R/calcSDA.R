@@ -129,6 +129,8 @@
 calcSDA <- function(X, Y, my.smr, tau=0.2, lambda=24, postfeed.acclim=6,
              tol=0.05, tol.type=c("proportion", "constant"),
              MO2.time.unit=c("hour", "min", "day"), X.time.unit=c("hour", "min", "day")) {
+
+        net <- status <- NA # to stop R check from finding no global binding
         my.data = data.frame(X, Y)
         my.data <- na.omit(my.data)
         names(my.data)[1:2]= c("time", "MO2")
@@ -195,6 +197,7 @@ calcSDA <- function(X, Y, my.smr, tau=0.2, lambda=24, postfeed.acclim=6,
 
         duringSDA = sda$net>0 & sda$time<end
 
+        sda$status = NA
         sda$status[duringSDA] = "sda"
         sda$status[sda$time==0] = "start"
         sda$status[is.na(sda$status)] = "post-sda"

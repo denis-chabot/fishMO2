@@ -4,8 +4,17 @@
 \alias{plotMO2}
 \title{Plot oxygen uptake values as a function of time.}
 \usage{
-plotMO2(x, y, mo2 = "dotital", o2 = "umol", t = "hr", m = "kg",
-  showO2 = F, Xlab = "Time (month-day)", ...)
+plotMO2(
+  x,
+  y,
+  mo2 = "dotital",
+  o2 = "umol",
+  t = "hr",
+  m = "kg",
+  showO2 = F,
+  Xlab = "Time (month-day)",
+  ...
+)
 }
 \arguments{
 \item{x}{A vector or a column from a data frame representing time,

@@ -33,7 +33,7 @@
 ##' GrHalO2crit$pch = ifelse(smr.indices, 1, 0)
 ##' GrHalO2crit$col = ifelse(smr.indices, "blue", grey(0.5))
 ##' plotMO2(GrHalO2crit$DateTime, GrHalO2crit$MO2, mo2="dotital", o2="umol",
-##'         t="min", m="kg", showO2 = F,
+##'         t="min", m="kg", showO2 = FALSE,
 ##'         Xlab = "Time (month-day)", pch=GrHalO2crit$pch, col=GrHalO2crit$col)
 ##' legend("topright", c("Used to calculate SMR", "Not used to calculate SMR"),
 ##'        pch=c(1,0), col=c("blue", grey(0.5)), bty="n")

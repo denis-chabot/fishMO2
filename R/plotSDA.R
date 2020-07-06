@@ -38,7 +38,7 @@
 ##'   parameter in \code{text}.
 ##' @param Cex.sda Size of the text for the SDA parameters. Same use as
 ##'   \code{cex} parameter in \code{text}
-##' @param Col.sda Colour of the shading representing SDA magnitude.
+##' @param col.sda Colour of the shading representing SDA magnitude.
 ##' @param \dots Other graphics parameters may work.
 ##' @note %% ~~further notes~~
 ##' @section Warning: The automatic positioning of SMR and of the SDA parameters
@@ -78,22 +78,22 @@
 ##'
 ##' par(mar=c(4, 4, 0.1, 0.1)+0.1, mgp=c(1.8,0.5,0))
 ##' plotMO2(sda.data$Logtime_hr, sda.data$MO2cor, mo2="dotital", o2="umol", t="min", m="kg",
-##'     showO2 = F, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250))
+##'     showO2 = FALSE, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250))
 ##' plotSDA(SDA)
 ##' # not enough space to show the arrow associated with magnitude, better to hide it
 ##' plotMO2(sda.data$Logtime_hr, sda.data$MO2cor, mo2="dotital", o2="umol", t="min", m="kg",
-##'     showO2 = F, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250))
-##' plotSDA(SDA, show.mag.arrow=F)
+##'     showO2 = FALSE, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250))
+##' plotSDA(SDA, show.mag.arrow=FALSE)
 ##'
 ##' # same data, but focus on post-feeding data and the SDA
 ##' plotMO2(sda.data$Logtime_hr, sda.data$MO2cor, mo2="dotital", o2="umol", t="min", m="kg",
-##'     showO2 = F, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250), xlim=c(0,100))
+##'     showO2 = FALSE, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250), xlim=c(0,100))
 ##' plotSDA(SDA, smr.lab.pos="1L")
 ##'
 ##' # SMR label is illegible, better not to display it
 ##' # Default position for peak not great, force a new position
 ##' plotMO2(sda.data$Logtime_hr, sda.data$MO2cor, mo2="dotital", o2="umol", t="min", m="kg",
-##'     showO2 = F, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250), xlim=c(0,100))
+##'     showO2 = FALSE, Xlab = "Time relative to feeding (hr)", ylim=c(50, 250), xlim=c(0,100))
 ##' plotSDA(SDA, smr.lab.pos="none", peak.lab.pos=c(40,150))
 ##'
 ##'
@@ -109,14 +109,14 @@ plotSDA <- function(my.sda, show.par=T, show.var=T, show.smr.line=T,
                     peak.lab.pos=NULL, mag.lab.pos=NULL,
                     smr.lab.pos=c("2L", "1L", "none"),
                     lty.smr =1, col.smr="orange",
-                    lty.feeding=1, Col.feeding="seagreen", Cex.par=0.8, Cex.sda=0.9,
-                    Col.sda=rgb(1,0,0,0.2),  ...) {
+                    lty.feeding=1, col.feeding="seagreen", Cex.par=0.8, Cex.sda=0.9,
+                    col.sda=rgb(1,0,0,0.2),  ...) {
 
     smr.lab.pos = match.arg(smr.lab.pos)
     sda.var = my.sda$sda.var
     sda.fit <- my.sda$sda.fit
-    sda.short = subset(sda.fit, status %in% c("start","sda")) # to draw the SDA polygon
-
+    # sda.short = subset(sda.fit, status %in% c("start","sda")) # to draw the SDA polygon
+    sda.short = sda.fit[sda.fit$status %in% c("start","sda"),]
     # this needs improvements, but works
     # required to properly format different scales
     rnd = ifelse(sda.var$peak.net <= 1, 3, ifelse(sda.var$peak.net <= 10, 2, 1))
@@ -146,13 +146,13 @@ plotSDA <- function(my.sda, show.par=T, show.var=T, show.smr.line=T,
     }
 
     if(show.feeding){
-        abline(v=0, lty=lty.feeding, col=Col.feeding)
+        abline(v=0, lty=lty.feeding, col=col.feeding)
     }
 
     # to draw a polygon representing SDA
     new.x <- c(sda.short$time, sda.short$time[length(sda.short$time)], sda.short$time[1])
     new.y <- c(sda.short$pred, sda.var$SMR, sda.var$SMR)
-    polygon(new.x, new.y, col=Col.sda)
+    polygon(new.x, new.y, col=col.sda)
 
     if(show.var){
         # add peak label and arrow

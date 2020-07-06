@@ -5,10 +5,18 @@
 \title{Calculate Specific Dynamic Action for a fish or aquatic invertebrate using
 non-parametric quantile regression.}
 \usage{
-calcSDA(X, Y, my.smr, tau = 0.2, lambda = 24, postfeed.acclim = 6,
-  tol = 0.05, tol.type = c("proportion", "constant"),
-  MO2.time.unit = c("hour", "min", "day"), X.time.unit = c("hour",
-  "min", "day"))
+calcSDA(
+  X,
+  Y,
+  my.smr,
+  tau = 0.2,
+  lambda = 24,
+  postfeed.acclim = 6,
+  tol = 0.05,
+  tol.type = c("proportion", "constant"),
+  MO2.time.unit = c("hour", "min", "day"),
+  X.time.unit = c("hour", "min", "day")
+)
 }
 \arguments{
 \item{X}{A numeric vector or data frame column containing the time relative

@@ -4,8 +4,14 @@
 \alias{solO2}
 \title{Solubility of oxygen in fresh- and seawater}
 \usage{
-solO2(t, s = 0, o2Unit = c("mg", "ml", "umol"), waterUnit = c("l",
-  "kg"), p = 101.325, author = c("Garcia", "Benson"))
+solO2(
+  t,
+  s = 0,
+  o2Unit = c("mg", "ml", "umol"),
+  waterUnit = c("l", "kg"),
+  p = 101.325,
+  author = c("Garcia", "Benson")
+)
 }
 \arguments{
 \item{t}{A vector of temperature values in degrees Celsius}
