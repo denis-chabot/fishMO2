@@ -1,0 +1,38 @@
+v0.46 2020-07-03 No change but compatibility with R 4.0
+v0.45 2019-02-23
+    - v0.44 broke plotSDA
+v0.44 2018-12-16
+    - moved the documentation to roxygen system to facilitate future upgrades,
+    - moved away from "depending" on other packages to "importing" the packages
+v0.43 2018-09-07
+    - corrected a bug whereas solO2 returned a wrong value when water unit was kg. I hope few were bitten by the bug, as most physiologists use liters
+v0.42 2018-07-19
+    - corrected a bug whereas solO2 returned a concentration in ml O2 when user requested micromoles. Improved calcO2crit.
+v0.41 2018-02-11
+    - added functions to calculate oxygen partial pressure, water vapor pressure, oxygen solubility and to convert between different oxygen concentration units.
+v0.40 2017-01-13
+    - added conv.O2conc() to convert between different oxygen concentration units.
+v0.39 2016-11-06
+    - corrected mistakes in help files for plotMO2 and plotR2, added function addSMR
+v0.38 2016-10-24
+    - modified calcSMR and calcO2crit to handle NAs
+v0.37 2016-10-11 14:00:00
+    - modified how known positions (IML, La_Rochelle, etc.) and time zones are included.
+v0.36 2016-09-14 18:00:00
+    - Improved documentation and examples
+v0.35 2016-09-13 18:00:00
+    - added plotSDA, corrected minor bugs
+v0.34 2016-09-13 18:00:00
+    - added calcSDA
+v0.33 2016-09-12 19:20:00
+    - added plotR2, plotO2crit
+v0.32 2016-09-12 13:20:00
+    - added plotMO2
+v0.31 2016-09-12 12:00:00
+    - added drawNights and package requirements (dependencies) StreamMetabolism and mclust
+v0.3 2016-09-11
+    - added 2 datasets
+v0.2 2016-09-11
+	- added makeO2lab
+v0.1 2016-09-09
+	- first and very preliminary version, documention available only for N, calcSMR and calcO2crit

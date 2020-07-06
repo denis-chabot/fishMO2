@@ -1,0 +1,113 @@
+##' Plot oxygen uptake values as a function of time.
+##'
+##' Wrapper function for \code{plot} and \code{makeO2lab} to produce plots of
+##' oxygen uptake as a function of time with better looking axis labels.
+##'
+##' Produces a plot which the user could easily reproduce by calling
+##' \verb{makeO2lab} and \verb{plot}. A call to \verb{drawNights} can enhance
+##' the plot.
+##'
+##' @param x A vector or a column from a data frame representing time,
+##' typically in POSIXct or numeric (hours, days). POSIXct and hours are
+##' compatible with \verb{drawNights}.
+##' @param y A vector or a column from a data frame representing oxygen uptake.
+##' @param mo2 Selects the formatting of MO2, such as \verb{dotital} (adds a
+##' dot on italics M to express a rate), \verb{dot}, \verb{ital} or
+##' \verb{plain}. Used to call \verb{makeO2lab}.
+##' @param o2 Oxygen units, either \verb{mg}, \verb{ug} (gives microg),
+##' \verb{mmol}, \verb{umol} (gives micromol), \verb{ml} or \verb{mL}. Used to
+##' call \verb{makeO2lab}.
+##' @param t Time unit, either \verb{hr} or \verb{min}. Used to call
+##' \verb{makeO2lab}.
+##' @param m Mass unit for the animal, either \verb{kg}, \verb{g} or \verb{mg}.
+##' Used to call \code{makeO2lab}.
+##' @param showO2 Logical, to hide or show \verb{O2} after the oxygen unit.
+##' Used to call \verb{makeO2lab}.
+##' @param Xlab A character string to label the x-axis of the plot. Default is
+##' "Time (month-day)".
+##' @param \dots Additional parameters that \verb{plot} can handle.
+##' @return A plot.
+##' @author Denis Chabot, Institut Maurice-Lamontagne, Department of Fisheries
+##' and Oceans
+##' @seealso \code{\link{plot}}, \code{\link{par}}, \code{\link{drawNights}},
+##' \code{\link{makeO2lab}}
+##' @examples
+##'
+##' StartD = as.POSIXct("2016-05-05 07:00")
+##' EndD = as.POSIXct("2016-05-12 08:00")
+##' Y = 1:5
+##' X = seq(StartD, EndD, length.out = 5)
+##' plotMO2(X, Y, mgp=c(2,0.5,0))
+##'
+##' # with real data
+##' data(codSDA)
+##' plotMO2(codSDA$DateTime, codSDA$MO2cor, mgp=c(2,0.5,0))
+##'
+##' # a more complex use of plotMO2
+##' data(codSDA)
+##' # remove bad R2s
+##' minR2 = 0.96
+##' codSDA = subset(codSDA, r2 >= minR2)
+##' # There was a sham-feeding 25.65 h before feeding. On average the
+##' # sham-feeding increased MO2 for about 10 h.
+##' # This period, as well as the period after the meal and during the period
+##' # when the fist was first placed into the respirometer should be removed
+##' # before calculating SMR
+##' # This fish took a long time to calm down, the acclimation period was set
+##' # to 24 h
+##' start = -97.22  # first MO2
+##' sham = -25.65   # time of sham-feeding
+##' acclim = 24     # nb of hours to exclude because of handling stress, this fish took a long time to calm down
+##' sham.acclim = 10  # nb of hours after sham-feeding with elevated MO2
+##' # instead of creating a subset of the data, as in an example of
+##' # calcSMR, we'll store indices instead
+##' smr.ind =  ((codSDA$Logtime_hr >= (start + acclim) &
+##'              codSDA$Logtime_hr < sham ) | (codSDA$Logtime_hr >=
+##'              (sham + sham.acclim) & codSDA$Logtime_hr < 0))
+##' codSDA$pch = ifelse(smr.ind, 1, 15)
+##' codSDA$cex = ifelse(smr.ind, 1, 0.7)
+##' def.par <- par(no.readonly = TRUE) # save default, for resetting...
+##' par(mar=c(3.1,3.3,0.2,0.2), mgp=c(1.8,0.5,0))
+##' plotMO2(codSDA$DateTime, codSDA$MO2cor, mgp=c(2,0.5,0), pch=codSDA$pch,
+##'         cex=codSDA$cex)
+##' smr = calcSMR(codSDA$MO2cor[smr.ind])
+##' abline(h=c(smr$mlnd, smr$quant[4], smr$low10pc),
+##'        col=c("black", "blue", "red"))
+##' legend("topright",
+##'     c("used for SMR", "not used for SMR", "MLND", "q_0.2", "low10pc"),
+##'     pch=c(15, 1,NA, NA, NA), pt.cex=c(0.7, 1,1,1,1),
+##'     lty=c(0,0,1,1,1),
+##'     col=c("black", "black", "black", "blue", "red"),
+##'     bty="n")
+##' attr(codSDA$DateTime, "tzone") = "EST"  # to force the use of the EST time
+##'                                         # zone, where the fish were studied
+##' StartD = codSDA$DateTime[1]
+##' EndD = codSDA$DateTime[nrow(codSDA)]
+##' Coords = par("usr")
+##' drawNights(StartD, EndD, Site=Sites$IML, TimeZone=myTZs$IMLst, coords=Coords)
+##'
+##' par(def.par)  # reset to default
+
+##'
+##' @export plotMO2
+plotMO2 = function(x, y, mo2="dotital", o2="umol", t="hr", m="kg", showO2 = F,
+                   Xlab = "Time (month-day)", ...){
+    Ylab = makeO2lab(mo2=mo2, o2=o2, t=t, m=m, showO2 = showO2)
+    plot(y ~ x, ylab=Ylab, xlab=Xlab, xaxt="n", bty="l", ...)
+    if("POSIXct" %in% class(x)){
+        r = range(x)
+        ndays = as.numeric(difftime(r[2],r[1], units="day"))
+        t <- as.POSIXct(round(r, "days"))
+        t[1] = t[1] - 24*60*60
+        t[2] = t[2] + 24*60*60
+        if(ndays<1.5){
+            axis.POSIXct(1, at=seq(t[1], t[2], by=6*60*60), format="%H", tck=-0.014)
+        } else { # longer session
+            axis.POSIXct(1, at = seq(t[1], t[2], by = "days"), format = "%m-%d")
+            axis(1, at=seq(t[1], t[2], by = 6*60*60), labels=F, tck = -0.007)
+        }
+    } else { # end if POSIX, assuming time is in hours
+        axis(1, at=seq(-120, 240, 24), labels=seq(-120, 240, 24), tick=T, tck=-0.014)
+        axis(1, at=seq(-120, 240, 6), labels=F, tck = -0.007)
+    }
+}

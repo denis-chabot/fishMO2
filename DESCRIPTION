@@ -1,0 +1,30 @@
+Package: fishMO2
+Title: Calculate and Plot SMR, O2crit and SDA, and convert between oxygen units
+Version: 0.46
+Date: 2020-07-03
+Authors@R: person("Chabot", "Denis", email = "chabot.denis@gmail.com",
+  role = c("aut", "cre"))
+Copyright: 2016, 2017, 2018, 2019, 2020, Fisheries and Oceans Canada
+Description: Functions to calculate and plot the standard metabolic rate (SMR)
+    of fishes and invertebrates (but it should work for air-breathing animals
+    also) from experiments yielding multiple measurements of oxygen consumption
+    (MO2) over time. If the experiment includes a phase where dissolved oxygen
+    (DO) was progressively decreased in the respirometer, functions to calculate
+    and plot O2crit are included. If the experiment includes a phase when the
+    animal was fed, the Specific Dynamic Action (SDA) can be calculated and
+    illustrated. Finally, functions to calculate the solubility of oxygen in
+    water and to convert between different units of DO are provided.
+Depends: R (>= 3.0.0)
+License: LGPL-3
+LazyLoad: true
+Encoding: UTF-8
+Imports:
+    graphics,
+    Hmisc,
+    mclust,
+    quantreg,
+    segmented,
+    shape,
+    stats,
+    StreamMetabolism
+RoxygenNote: 6.1.1
