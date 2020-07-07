@@ -1,23 +1,23 @@
 ##' Show night time on an existing plot.
-##' 
+##'
 ##' Add shaded areas as background on an existing plot where the X-axis is
 ##' time, to indicate night time. This function relies on package
 ##' \verb{StreamMetabolism} to obtain the time of sunrise and sunset for each
 ##' day shown on the plot. Normally, this function is not called directly by
 ##' the user, but is used by other functions in the package.
-##' 
+##'
 ##' This function can only be called after the user has produced a plot AND the
 ##' plot's X-axis is in POSIXct time units or in hours. It adds shading for the
 ##' parts of the plot that represent night-time. This only makes sense for
 ##' plots with a X-axis representing a sufficient number of hours to have both
 ##' day-time and night-time represented on the plot.
-##' 
+##'
 ##' The locations used by the author are hard-coded in the package (see
 ##' argument Site), as well as the time zones corresponding to these sites
 ##' (argument TimeZone). Any Site and TimeZone can be used, but the user must
 ##' enter the lat-long info for Site and the time zone argument as required by
 ##' other date-time objects in R.
-##' 
+##'
 ##' @param startD First day in dataset, in Date format.
 ##' @param endD Last day in dataset, in Date format.
 ##' @param Site Numeric vector with 2 values, latitude and longitude of the
@@ -51,7 +51,7 @@
 ##' shading. In this case, draw the plot's frame but not the data points, then
 ##' draw the night-shading, and only then add the data points (i.e. after
 ##' calling \verb{drawNights}).
-##' 
+##'
 ##' Time zones can be an issue when analyzing data with a computer located in a
 ##' different time zone than where the data were collected. R accounts
 ##' correctly for different time zones but what you get is the data displayed
@@ -64,7 +64,7 @@
 ##' @seealso See Also as \code{\link{rgb}}, \code{\link{sunrise.set}},
 ##' \code{\link{timezones}}
 ##' @examples
-##' 
+##'
 ##' StartD = as.POSIXct("2016-05-05 07:00", tz=myTZs$FRcivil)
 ##' EndD = as.POSIXct("2016-05-12 08:00", tz=myTZs$FRcivil)
 ##' Y = 1:5
@@ -72,18 +72,18 @@
 ##' plot(Y~X)
 ##' coords =par("usr")
 ##' drawNights(StartD, EndD, Site=Sites$La_Rochelle, TimeZone=myTZs$FRcivil, coords=coords)
-##' 
+##'
 ##' # with real data
-##' data(codSDA)  # data collected at Institut Maurice-Lamontagne 
+##' data(codSDA)  # data collected at Institut Maurice-Lamontagne
 ##' plotMO2(codSDA$DateTime, codSDA$MO2cor, mgp=c(2,0.5,0))
 ##' StartD = codSDA$DateTime[1]
 ##' EndD = codSDA$DateTime[nrow(codSDA)]
 ##' Coords = par("usr")
 ##' drawNights(StartD, EndD, Site=Sites$IML, TimeZone=myTZs$IMLst, coords=Coords)
-##' 
+##'
 ##' # this is pretty but could be wrong if your computer's time zone is not "EST"
 ##' # we want to see this in the time zone where the data were recorded
-##' 
+##'
 ##' attr(codSDA$DateTime, "tzone") = "EST"
 ##' plotMO2(codSDA$DateTime, codSDA$MO2cor, mgp=c(2,0.5,0))
 ##' StartD = codSDA$DateTime[1]
@@ -91,10 +91,16 @@
 ##' Coords = par("usr")
 ##' drawNights(StartD, EndD, Site=Sites$IML, TimeZone=myTZs$IMLst, coords=Coords)
 ##' # notice how the night-time straddles "midnight" when we force the time zone to be "EST"
-##' 
+##'
 ##' @export drawNights
 drawNights <- function(startD, endD, Site=Sites$IML, TimeZone=myTZs$IMLst, coords,
                        XunitsOut="POSIXct", zero=NA, night.col=rgb(0,0,0,0.08)) {
+# You need the suggested package for this function
+if (!requireNamespace("StreamMetabolism", quietly = TRUE)) {
+            stop("Package \"StreamMetabolism\" needed for this function to work. Please install it.",
+                 call. = FALSE)
+        }
+
     nbDays = as.integer(endD - startD) + 2      # sunrise.set seems to start the day before my start date,
                                                 # so I must add one day, then start date, then diff between start and end
 	pp <- StreamMetabolism::sunrise.set(Site[1], Site[2], as.character(startD-1), timezone=TimeZone, nbDays)

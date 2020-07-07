@@ -4,5 +4,5 @@ note <- sprintf("R package version %s", meta$Version)
 bibentry(bibtype = "Manual",
          title = "{fishMO2}: Calculate and plot the standard metabolic rate (SMR), the critical oxygen level (O2crit) and the specific dynamic action (SDA) and related variables in fishes and crustaceans",
          author = c(person("Denis", "Chabot")),
-         year = 2016,
+         year = 2020,
          url = "https://www.researchgate.net/project/fishMO2-a-R-package-to-calculate-and-plot-SMR-O2crit-and-SDA")
