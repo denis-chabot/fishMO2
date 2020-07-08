@@ -1,6 +1,6 @@
 Package: fishMO2
 Title: Calculate and Plot SMR, O2crit and SDA, and convert between oxygen units
-Version: 0.47
+Version: 0.47.0
 Date: 2020-07-07
 Authors@R: person("Chabot", "Denis", email = "chabot.denis@gmail.com",
   role = c("aut", "cre"))
@@ -16,7 +16,7 @@ Description: Functions to calculate and plot the standard metabolic rate (SMR)
     water and to convert between different units of DO are provided.
 URL: http://github.com/denis-chabot/fishMO2
 Depends: R (>= 3.0.0)
-License: LGPL-3
+License: GPL-3
 LazyLoad: true
 LazyData: true
 Encoding: UTF-8
